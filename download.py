@@ -42,8 +42,9 @@ class MyListener(StreamListener):
                             'time': tweet['created_at'],
                             'category': get_category(tweet_text)
                         }
-                    with open('result.json', 'a') as f:
-                        f.write(json.dumps(raw_tweet))
+                    # with open('result.json', 'a') as f:
+                    # f.write(json.dumps(raw_tweet))
+                        config.es.index(index=config.AWS_ES_INDEX, doc_type=config.AWS_ES_TYPE, id=tweet_id, body=raw_tweet)
                 self.count += 1
             else:
                 twitter_stream.disconnect()
