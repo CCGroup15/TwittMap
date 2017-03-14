@@ -83,7 +83,7 @@
             }
           </script>
         </li>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Refresh</button>
         </form>
     </nav>
 
@@ -104,6 +104,7 @@
 
     <script>
           var map;
+          use = {{coords}}
           function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
               zoom: 2,
@@ -111,13 +112,12 @@
               mapTypeId: 'terrain'
             });
 
-            // Create a <script> tag and set the USGS URL as the source.
-            var script = document.createElement('script');
-
-            // This example uses a local copy of the GeoJSON stored at
-            // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-            script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-            document.getElementsByTagName('head')[0].appendChild(script);
+            for (i = 0; i < use.length; i++) {
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(use[i][0], use[i][1]),
+                map: map
+              });
+            }
             
             map.data.setStyle(function(feature) {
               var magnitude = feature.getProperty('mag');
