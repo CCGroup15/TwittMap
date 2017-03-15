@@ -16,12 +16,9 @@
     <link href="../static/css/jumbotron.css" rel="stylesheet">
     <style type="text/css" media="all">
     .chosen-rtl .chosen-drop { left: -9000px; }
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
     #map {
       height: 100%;
     }
-    /* Optional: Makes the sample page fill the window. */
     html, body {
       height: 100%;
       margin: 0;
@@ -34,12 +31,12 @@
   <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       
-      <a class="navbar-brand" href="#">Twitt Map</a>
+      <a class="navbar-brand" href="/heat_hello">Twitt Map [ICON]         click to display HEAT</a>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="/result" method="GET">
+        <form class="form-inline my-2 my-lg-0" action="/icon_result" method="GET">
         <li class = "nav-item mr-sm-2 my-lg-0">
           <select data-placeholder=" Keyword Select" style="width:300px;" class="chosen-select" multiple tabindex="6" name="category" id="category">
             <option value=""></option>
@@ -83,14 +80,12 @@
             }
           </script>
         </li>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Refresh</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
         </form>
     </nav>
 
      <!-- Main jumbotron for a primary marketing message or call to action -->
     <div id="map"></div>
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -118,33 +113,11 @@
                 map: map
               });
             }
-            
-            map.data.setStyle(function(feature) {
-              var magnitude = feature.getProperty('mag');
-              return {
-                icon: getCircle(magnitude)
-              };
-            });
           }
-
-          function getCircle(magnitude) {
-            return {
-              path: google.maps.SymbolPath.CIRCLE,
-              fillColor: 'red',
-              fillOpacity: .2,
-              scale: Math.pow(2, magnitude) / 2,
-              strokeColor: 'white',
-              strokeWeight: .5
-            };
-          }
-
-          function eqfeed_callback(results) {
-            map.data.addGeoJson(results);
-          }
-        </script>
-        <script async defer
+    </script>
+    <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAovkBO68rNju_an3XHa29XmUQ0RWq55Is&callback=initMap">
-        </script>
+    </script>
 
   </body>
 </html>
