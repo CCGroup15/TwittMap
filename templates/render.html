@@ -113,7 +113,15 @@
                 map: map
               });
             }
+
+            map.addListener('click', function(e) {
+              // placeMarkerAndPanTo(e.latLng, map);
+              // alert(e.latLng);
+              // window.location.href("http://127.0.0.1:5000/geolocation/?location="+e.latLng);
+              window.location.href = "http://127.0.0.1:5000/geolocation?location=" + e.latLng;
+            });
           }
+          
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAovkBO68rNju_an3XHa29XmUQ0RWq55Is&callback=initMap">

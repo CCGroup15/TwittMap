@@ -6,6 +6,7 @@ import string
 import json
 import config
 
+from elasticsearch.client import IndicesClient
 from http.client import IncompleteRead
 
 def get_category(tweet):
@@ -53,6 +54,40 @@ class MyListener(StreamListener):
             # there is some uncomplete contents in tweets, we could output error messages to check
 
 if __name__ == '__main__':
+    # index_body = {
+    #     "mappings" : {
+    #         "tweet" : {
+    #             "properties" : {
+    #                 "category" : {
+    #                     "type" : "text"
+    #                 },
+    #                 "coordinates" : {
+    #                     "properties": {
+    #                         "location" : { "type" : "geo_point" }
+    #                     }
+    #                 },
+    #                 "id" : {
+    #                     "type" : "text"
+    #                 },
+    #                 "place" : {
+    #                     "type" : "text"
+    #                 },
+    #                 "text" : {
+    #                     "type" : "text"
+    #                 },
+    #                 "time" : {
+    #                     "type" : "text"
+    #                 },
+    #                 "user" : {
+    #                     "type" : "text"
+    #                 }
+    #             }     
+    #         }
+    #     }
+    # }
+    # es_index = IndicesClient(config.es)
+    # es_index.create(index="twitt_map",body=index_body)
+    # define the mapping for geo_point type in twitt_map index
     while True:
         try:
             auth = OAuthHandler(config.consumer_key, config.consumer_secret)
